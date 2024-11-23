@@ -11,8 +11,6 @@ A proof of concept implementation of Retrieval Augmented Generation (RAG) system
 - Enterprise-grade security and compliance
 - Scalable cloud-native architecture
 
-[Rest of content remains the same, but removing organizational references]
-
 ## Contact
 - **Technical Lead**: Jason Valenzano
 - **Project Type**: Enterprise RAG System PoC

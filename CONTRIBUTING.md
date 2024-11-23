@@ -1,5 +1,3 @@
-Perfect! Let's set up CONTRIBUTING.md next, keeping it professional but generic for public viewing.
-
 ```markdown
 # Contributing Guidelines
 
