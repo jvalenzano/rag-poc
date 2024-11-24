@@ -1,57 +1,50 @@
-name: CI/CD Pipeline
-
+# When does this workflow run?
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
+  push:              # Runs when code is pushed...
+    branches: [ main, develop ]  # ...to main or develop branches
+  pull_request:      # Runs when pull requests are made...
+    branches: [ main, develop ]  # ...targeting main or develop branches
 
 jobs:
+  # Job 1: Testing
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Uses Ubuntu for running tests
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
+    - uses: actions/checkout@v2  # Gets your code
+    - name: Set up Python        # Installs Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.9'
     
-    - name: Install dependencies
+    - name: Install dependencies # Installs required packages
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install pytest pytest-cov flake8
-    
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings
-        flake8 . --count --exit-zero --max-complexity=10 --statistics
 
-    - name: Run tests
+    - name: Lint with flake8     # Checks code quality
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        
+    - name: Run tests            # Runs your tests
       run: |
         if [ -d "tests" ]; then pytest --cov=./ --cov-report=xml; fi
 
+  # Job 2: Security Scanning
   security:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Run security scan
+    - name: Run security scan    # Checks for security vulnerabilities
       uses: snyk/actions/python@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --severity-threshold=high
 
+  # Job 3: Deployment
   deploy:
-    needs: [test, security]
+    needs: [test, security]      # Only runs if tests & security pass
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main'  # Only deploys from main branch
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Deploy
+    - name: Deploy               # Placeholder for deployment
       run: |
         echo "Deploy step - to be implemented"
