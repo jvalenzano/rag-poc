@@ -1,0 +1,9 @@
+.DS_Store       # Mac system file that stores folder attributes
+.env            # Environment variables file (contains secrets)
+*.log           # Any log files
+__pycache__/    # Python compilation cache folders
+*.pyc           # Python compiled files
+.vscode/        # VS Code settings folder
+.idea/          # IntelliJ/PyCharm settings folder
+venv/           # Python virtual environment folder
+node_modules/   # JavaScript/Node.js dependencies folder

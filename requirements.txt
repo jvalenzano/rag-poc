@@ -1,0 +1,20 @@
+# Core dependencies
+google-cloud-aiplatform>=1.25.0
+google-cloud-storage>=2.10.0
+python-dotenv>=1.0.0
+
+# Vector storage
+pgvector>=0.2.0
+
+# API and Web
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+flake8>=6.1.0
+
+# Development
+black>=23.9.1
+isort>=5.12.0
